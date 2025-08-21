@@ -1,0 +1,21 @@
+name: Run Super-Linter
+
+on:
+  workflow_dispatch:
+
+jobs:
+  lint-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Super-Linter
+        uses: super-linter/super-linter@v7.4.0
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISABLE_LINTERS: CHECKOV,MARKDOWN_PRETTIER,YAML_PRETTIER
+          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_JAVA: true
